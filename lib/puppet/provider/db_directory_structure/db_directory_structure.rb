@@ -27,9 +27,11 @@ Puppet::Type.type(:db_directory_structure).provide(:db_directory_structure) do
       owned_by_oracle ora_inventory, user, group
     end
 
-    unless Dir.exist?(oracle_home)
-      make_directory oracle_home
-      owned_by_oracle oracle_home, user, group
+    unless oracle_home.nil?
+      unless Dir.exist?(oracle_home)
+        make_directory oracle_home
+        owned_by_oracle oracle_home, user, group
+      end
     end
   end
 
