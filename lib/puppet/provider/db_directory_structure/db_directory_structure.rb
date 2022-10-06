@@ -12,22 +12,22 @@ Puppet::Type.type(:db_directory_structure).provide(:db_directory_structure) do
     Puppet.info "configure oracle folders for #{name}"
 
     Puppet.info "create the following directories: #{oracle_base}, #{ora_inventory}, #{download_folder}"
-    unless oracle_base.nil?
+    unless Dir.exist?(oracle_base)
       make_directory oracle_base
       owned_by_oracle oracle_base, user, group
     end
     
-    unless download_folder.nil?
+    unless Dir.exist?(download_folder)
       make_directory download_folder
       allow_everybody download_folder, user, group
     end
     
-    unless ora_inventory.nil?
+    unless Dir.exist?(ora_inventory)
       make_directory ora_inventory
       owned_by_oracle ora_inventory, user, group
     end
 
-    unless oracle_home.nil?
+    unless Dir.exist?(oracle_home)
       make_directory oracle_home
       owned_by_oracle oracle_home, user, group
     end
