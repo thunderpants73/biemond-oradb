@@ -22,6 +22,10 @@ module Puppet
         download_folder = resource[:download_dir]
         oracle_home     = resource[:oracle_home_dir]
 
+        unless oracle_home.nil?
+          oracle_home = resource[:oracle_base_dir]
+        end
+
         if File.exist?(oracle_base) && File.exist?(ora_inventory) && File.exist?(download_folder) && File.exist?(oracle_home)
           :present
         else
